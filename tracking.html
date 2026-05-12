@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Schumache cargo logistics</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/schumache-cargo-logistics-high-resolution-logo.png" rel="icon">
+  <link href="assets/img/schumache-cargo-logistics-high-resolution-logo.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+ 
+</head>
+
+<body class="get-a-quote-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Schumache cargo logistics</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home<br></a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="tracking.html">Track</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.jpg);">
+      <div class="container position-relative">
+        <h1>Shipment Tracking</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Tracking</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+<br>
+    <!-- Track Section -->
+    
+    <style>
+      form {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+      }
+
+      form div {
+          margin-bottom: 20px;
+      }
+
+      label {
+          display: block;
+          font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      select {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+      }
+
+      button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 15px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      button:hover {
+          background-color: #45a049;
+      }
+
+      #error_message,
+      #location_error {
+          display: none;
+          margin-top: 5px;
+          font-size: 14px;
+      }
+
+      /* CSS for the tracking result */
+      .result {
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 20px;
+          margin-top: 20px;
+          background-color: #fff;
+      }
+
+      .result h3 {
+          margin-top: 0;
+          color: #333;
+      }
+
+      .result p {
+          margin: 10px 0;
+      }
+  </style>
+
+  <body>
+   <div class="container">
+          <form id="trackForm">
+              <div class="mb-3">
+                  <label for="trackingNumber" class="form-label">Enter the Consignment No.:</label>
+                  <input type="text" class="form-control" id="trackingNumber" placeholder="Enter Tracking Number" required>
+                  <div class="invalid-feedback">Please enter a tracking number.</div>
+              </div>
+              <button type="submit" class="btn btn-primary">Track Result</button>
+          </form>
+          <div class="result mt-4" id="trackingResult" style="display: none;">
+              <!-- Tracking details will be displayed here -->
+              <h4>Shipment Details</h4>
+              <p><strong>Consignment Number:</strong> <span id="consignmentNumber"></span></p>
+              <p><strong>Status:</strong> <span id="shipmentStatus"></span></p>
+              <p><strong>Consignment Location:</strong> <span id="consignmentLocation"></span></p>
+              <p><strong>Location:</strong> <span id="shipmentLocation"></span></p>
+              <p><strong>Estimated Delivery:</strong> <span id="estimatedDelivery"></span></p>
+              <p><strong>Time:</strong> <span id="time"></span></p>
+              <p><strong>Remarks:</strong> <span id="remarks"></span></p>
+              <p><strong>Phone Number:</strong> <span id="updatedByPhoneNumber"></span></p>
+              <p><strong>Email:</strong> <span id="updatedByEmail"></span></p>
+               <p><strong>Updated By:</strong> <span id="updatedBy"></span></p>
+          </div>
+      </div>
+
+      <script>
+        // Function to save tracking information to localStorage
+        function saveTrackingInfo(trackingNumber, trackingDetails) {
+            localStorage.setItem(trackingNumber, JSON.stringify(trackingDetails));
+        }
+    
+        // Display the tracking details when the form is submitted
+        document.getElementById('trackForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var enteredTrackingNumber = document.getElementById('trackingNumber').value;
+            var trackingDetails = getTrackingDetails(enteredTrackingNumber);
+            if (trackingDetails) {
+                displayTrackingDetails(trackingDetails);
+            } else {
+                alert("Invalid tracking number. Please enter the correct tracking number.");
+            }
+        });
+    
+        // Function to get tracking details based on tracking number
+        function getTrackingDetails(trackingNumber) {
+            // Example tracking details for different clients
+            const trackingDetailsMap = {
+                '775590DY232': {
+                    trackingNumber: '775590DY232',
+                    status: 'JUST RECEIVED',
+                    consignmentLocation: 'TEXAS, USA',
+                    location: 'LOT 1349, CHERIH, DURIAN TAWAR MUKIM TRIANG 28200 BERA, PAHANG DARUL MAKMUR.',
+                    estimatedDelivery: '2024-09-22',
+                    time: '12:00 PM',
+                    remarks: 'READY FOR DELIVERY',
+                    updatedByPhoneNumber: '+60 0179 464026',
+                    updatedByEmail: 'EYDASYUHADAZULKEFLI@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                },
+                '987651GH227': {
+                    trackingNumber: '987651GH227',
+                    status: 'MOVED OUT FOR DELIVERY',
+                    consignmentLocation: 'ISLAND OF BORNEO, MALAYSIA BOARDER',
+                    location: '300 REMINGTON ST. 406 FT. COLLINS CO, USA',
+                    estimatedDelivery: '2024-10-10',
+                    time: '2:30 PM',
+                    remarks: ' OUT FOR DELIVERY ',
+                    updatedByPhoneNumber: '+1 970 443 - 9139',
+                    updatedByEmail: 'RONNIEOLIVAS90@GMAIL.COM',
+                    updatedBy: 'C0MPANY'
+                },
+                 '977651DB212': {
+                    trackingNumber: '977651DB212',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: 'BERLIN GERMANY',
+                    location: '1408 BEAU MONDE DR #4 LISLE, ILLINOIS 60532',
+                    estimatedDelivery: '2024-10-10',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY PAYMENT',
+                    updatedByPhoneNumber: "+1 630 664 9936" ,
+                    updatedByEmail: 'DEBRABENNEY@GMAIL.COM',
+                    updatedBy: 'SCHUMACHE ADMIN'
+                 },
+                  ' 224367RG567 ': {
+                    trackingNumber: ' 224367RG567 ',
+                    status: 'JUST RECEIVED ',
+                    consignmentLocation: '',
+                    location: 'ANGELINA V. PAJARILLO 785 PUROK 5 BRGY. SINALHAN CITY OF STA. ROSA, LAGUNA PHILIPPINES 4026 ',
+                    estimatedDelivery: '2024-11-06',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY PAYMENT',
+                    updatedByPhoneNumber: '09923037925',
+                    updatedByEmail: 'ANGIEVILLANUEVA1967@GMAIL.COM',
+                    updatedBy: 'SCHUMACHE ADMIN'
+                 },
+                  '287651AQ454': {
+                    trackingNumber: '287651AQ454',
+                    status: 'READY FOR DELIVERY FROM USA',
+                    consignmentLocation: '',
+                    location: 'SAN JUAN PUERTO RICO',
+                    estimatedDelivery: '2024-07-17',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+1 787 597 4339',
+                    updatedByEmail: 'CARM339@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                  '767651RS447': {
+                    trackingNumber: '767651RS447',
+                    status: ' DELIVERY ON HOLD ',
+                    consignmentLocation: '',
+                    location: '5153 DAGGAR FLATES SAN ANTONIO,TEXAS 78244',
+                    estimatedDelivery: '2024-05-16',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+1 2108 371 277',
+                    updatedByEmail: 'YBLOGISTICSLLC@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                  '987651QA227': {
+                    trackingNumber: '987651QA227',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: '',
+                    location: '2605 JONES ROAD APT 214 AUSTIN TX, TX 78745',
+                    estimatedDelivery: '2024-06-10',
+                    time: '10:30 AM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+1 (737) 280 - 4409',
+                    updatedByEmail: '<CHERLMORGAN4800@ICLOUD.COM>',
+                    updatedBy: 'ADMIN'
+                 },
+                  '987651QU447': {
+                    customername:  'ANGELINA V. PAJARILLO',
+                    trackingNumber: '987651QU447',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: '',
+                    location: '785 PUROK 5 BRGY. SINALHAN CITY 0F STA. ROSA, LAGUNA PHILIPPINES 4026',
+                    estimatedDelivery: '2024-11-06',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY PAYMENT',
+                    updatedByPhoneNumber: '099233037925',
+                    updatedByEmail: 'ANGIEVILLANUEVA1967@GMAIL.COM',
+                    updatedBy: 'SCHUMACHE ADMIN'
+                 },
+                  '987651QA447': {
+                    trackingNumber: '987651QA447',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: '',
+                    location: 'CUIDAD IQUITOS CALLE RICHARDO PALMA 568/MOOR',
+                    estimatedDelivery: '2024-05-13',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+51964972430',
+                    updatedByEmail: 'CARLOSREATEGUIDAHUA@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                  '987651QA447': {
+                    trackingNumber: '987651QA447',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: '',
+                    location: 'CUIDAD IQUITOS CALLE RICHARDO PALMA 568/MOOR',
+                    estimatedDelivery: '2024-05-13',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+51964972430',
+                    updatedByEmail: 'CARLOSREATEGUIDAHUA@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                  '987651QA447': {
+                    trackingNumber: '987651QA447',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: '',
+                    location: 'CUIDAD IQUITOS CALLE RICHARDO PALMA 568/MOOR',
+                    estimatedDelivery: '2024-05-13',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+51964972430',
+                    updatedByEmail: 'CARLOSREATEGUIDAHUA@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                  '234fghjyr': {
+                    trackingNumber: '234fghjyr',
+                    status: 'READY FOR DELIVERY',
+                    consignmentLocation: '',
+                    location: 'CUIDAD IQUITOS CALLE RICHARDO PALMA 568/MOOR',
+                    estimatedDelivery: '2024-05-13',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR DELIVERY',
+                    updatedByPhoneNumber: '+51964972430',
+                    updatedByEmail: 'CARLOSREATEGUIDAHUA@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                 
+                 '267890RR34': {
+                    trackingNumber: '267890RR34',
+                    status: 'SHIPPED FOR DELIVERY TO DELIVERY LOCATION',
+                    consignmentLocation: '',
+                    location: 'SAN JUAN PUERTO RICO',
+                    estimatedDelivery: '2024-07-19',
+                    time: '2:30 PM',
+                    remarks: 'SHIPPED FOR DELIVERY',
+                    updatedByPhoneNumber: '+1 787 597 4339 ',
+                    updatedByEmail: 'CARM439@GMAIL.COM',
+                    updatedBy: 'ADMIN'
+                 },
+                 
+                 '977651QR447':{
+                    trackingNumber: '977651QR447',
+                    status: 'ARRIVED MIAMI PORT',
+                    consignmentLocation: '',
+                    location: '228 PARKDALE AVE. PONTIAC MI 48340 2554',
+                    estimatedDelivery: '2024-10-18',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR CUSTOMS CLEARANCE',
+                    updatedByPhoneNumber: '+1 313 695 0433',
+                    updatedByEmail: 'NOELC5222@GMAIL.COM',
+                    updatedBy: 'SCHUMACHE ADMIN'
+                 },
+                 
+                 'dhhdhhcnd':{
+                    trackingNumber: 'dhhdhhcnd',
+                    status: 'ARRIVED MIAMI PORT',
+                    consignmentLocation: '',
+                    location: '228 PARKDALE AVE. PONTIAC MI 48340 2554',
+                    estimatedDelivery: '2024-10-18',
+                    time: '2:30 PM',
+                    remarks: 'WAITING FOR CUSTOMS CLEARANCE',
+                    updatedByPhoneNumber: '+1 313 695 0433',
+                    updatedByEmail: 'NOELC5222@GMAIL.COM',
+                    updatedBy: 'SCHUMACHE ADMIN'
+                 },
+                 
+                 '9774562JH337':{
+                    trackingNumber: '9774562JH337',
+                    status: 'GOODS COMING FROM : BRUNEI',
+                    consignmentLocation: '',
+                    location: '13756 BROOKDALE AVE, BROOKPARK OH, 44142',
+                    estimatedDelivery: '28-02-2025',
+                    time: '2:30 PM',
+                    remarks: 'ON THE WAY TO DELIVERY ADDRESS.',
+                    updatedByPhoneNumber: '+1 2162 800-903',
+                    updatedByEmail: 'johncampbellfrancis1@GMAIL.COM',
+                    updatedBy: 'SCHUMACHE ADMIN'
+                 },
+                 
+            };    
+    
+            return trackingDetailsMap[trackingNumber];
+        }
+    
+        // Function to display the tracking details
+        function displayTrackingDetails(trackingDetails) {
+            var trackingDetailsDiv = document.getElementById('trackingResult');
+            trackingDetailsDiv.style.display = 'block'; // Display the tracking details
+            document.getElementById('consignmentNumber').innerText = trackingDetails.trackingNumber;
+            document.getElementById('shipmentStatus').innerText = trackingDetails.status;
+            document.getElementById('consignmentLocation').innerText = trackingDetails.consignmentLocation;
+            document.getElementById('shipmentLocation').innerText = trackingDetails.location;
+            document.getElementById('estimatedDelivery').innerText = trackingDetails.estimatedDelivery;
+            document.getElementById('time').innerText = trackingDetails.time;
+            document.getElementById('remarks').innerText = trackingDetails.remarks;
+            document.getElementById('updatedByPhoneNumber').innerText = trackingDetails.updatedByPhoneNumber;
+            document.getElementById('updatedByEmail').innerText = trackingDetails.updatedByEmail;
+            document.getElementById('updatedBy').innerText = trackingDetails.updatedBy;
+        }
+    </script>
+    <br>
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename"> Schumacher Cargo Logistics </span>
+          </a>
+          <p>We are one of the Nations largest shipment companies, Following the quality of our service thus having gained the trust of our many clients. We provide cargo safety throughout all the stages of our delivery process. We enhance our industry operations by relieving you of the worries associated with freight forwarding.</p>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li>Air Freight</a></li>
+            <li>Ocean Freight</a></li>
+            <li>Road Freight</a></li>
+            <li>Rail Freight</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>Head Office Berlin, Germany</p>
+          <p class="mt-4"><strong>Phone:</strong> <span>+1 424 438-0540 / +1 217-409-2791</span></p>
+          <p><strong>Email:</strong> <span>Schumachecargologistics@outlook.com</span></p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename"> Schumacher Cargo Logistics </strong> <span>All Rights Reserved</span></p>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
